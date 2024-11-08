@@ -3,21 +3,25 @@ import numpy as np
 import plotly.graph_objects as go
 
 # Dados de exemplo
-tempo_medio_atual = 8  # em horas
-tempo_alvo = 6         # em horas
+tempo_medio_atual = 10  # em horas
+tempo_alvo = 5         # em horas
 historico_tempo = [7.5, 8, 8.5, 7, 8, 7.8, 8.1, 7.9, 8.3, 8.2]  # Histórico de tempos médios
 
 # 1. Barra de Progresso
 def barra_progresso(tempo_medio, tempo_alvo):
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(8, 4))  # Aumentar o tamanho do gráfico
     ax.barh(['Tempo Médio'], [tempo_medio], color='orange', edgecolor='black', label='Tempo Médio Atual')
     ax.barh(['Tempo Alvo'], [tempo_alvo], color='green', edgecolor='black', label='Tempo Alvo')
     ax.set_xlim(0, max(tempo_medio, tempo_alvo) + 2)
     ax.set_xlabel('Horas')
     ax.legend()
     ax.set_title("Barra de Progresso do Tempo Médio")
-    plt.savefig('barra_progresso.png')  # Salvar o gráfico
+
+    # Ajuste das margens para evitar corte de texto
+    plt.subplots_adjust(left=0.2)  # Aumenta o espaço à esquerda
+    plt.savefig('barra_progresso.png', bbox_inches='tight')  # Salva o gráfico com margens ajustadas
     plt.close(fig)
+
 
 # 2. Gráfico de Velocímetro
 def grafico_velocimetro(tempo_medio, tempo_alvo):
