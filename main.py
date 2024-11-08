@@ -10,8 +10,8 @@ historico_tempo = [9.8, 10.2, 10, 10.1, 9.9, 10.3, 10.1, 10, 9.8, 10.2]  # Hist�
 # 1. Barra de Progresso
 def barra_progresso(tempo_medio, tempo_alvo):
     fig, ax = plt.subplots(figsize=(8, 4))  # Aumentar o tamanho do gráfico
-    ax.barh(['Tempo Médio'], [tempo_medio], color='orange', edgecolor='black', label='Tempo Médio Atual')
-    ax.barh(['Tempo Alvo'], [tempo_alvo], color='green', edgecolor='black', label='Tempo Alvo')
+    ax.barh(['Tempo Médio'], [tempo_medio], color='#fe7624', edgecolor='black', label='Tempo Médio Atual')
+    ax.barh(['Tempo Alvo'], [tempo_alvo], color='#0296d3', edgecolor='black', label='Tempo Alvo')
     ax.set_xlim(0, max(tempo_medio, tempo_alvo) + 2)
     ax.set_xlabel('Horas')
     ax.legend()
@@ -22,7 +22,6 @@ def barra_progresso(tempo_medio, tempo_alvo):
     plt.savefig('barra_progresso.png', bbox_inches='tight')  # Salva o gráfico com margens ajustadas
     plt.close(fig)
 
-
 # 2. Gráfico de Velocímetro
 def grafico_velocimetro(tempo_medio, tempo_alvo):
     fig = go.Figure(go.Indicator(
@@ -30,8 +29,8 @@ def grafico_velocimetro(tempo_medio, tempo_alvo):
         value=tempo_medio,
         gauge={'axis': {'range': [0, 10]},
                'steps': [
-                   {'range': [0, tempo_alvo], 'color': "green"},
-                   {'range': [tempo_alvo, tempo_medio], 'color': "yellow"},
+                   {'range': [0, tempo_alvo], 'color': "#0296d3"},
+                   {'range': [tempo_alvo, tempo_medio], 'color': "#fe7624"},
                    {'range': [tempo_medio, 10], 'color': "red"}],
                'threshold': {'line': {'color': "black", 'width': 4}, 'thickness': 0.75, 'value': tempo_medio}},
         title={'text': "Gráfico de Velocímetro"}
@@ -41,9 +40,9 @@ def grafico_velocimetro(tempo_medio, tempo_alvo):
 # 3. Gráfico de Linha
 def grafico_linha(historico_tempo):
     fig, ax = plt.subplots(figsize=(8, 4))  # Aumenta o tamanho do gráfico
-    ax.plot(historico_tempo, marker='o', color='b', label="Tempo Médio")
-    ax.axhline(y=tempo_medio_atual, color='orange', linestyle='--', label="Média Atual (8h)")
-    ax.axhline(y=5, color='green', linestyle='--', label="Tempo Alvo (5h)")  # Ajusta o tempo alvo para 5 horas
+    ax.plot(historico_tempo, marker='o', color='#fe7624', label="Tempo Médio")  # Cor do tempo médio
+    ax.axhline(y=tempo_medio_atual, color='#fe7624', linestyle='--', label="Média Atual (10h)")
+    ax.axhline(y=tempo_alvo, color='#0296d3', linestyle='--', label="Tempo Alvo (5h)")  # Cor do tempo alvo
     ax.set_xlabel("Período")
     ax.set_ylabel("Horas")
     ax.legend()
@@ -51,12 +50,11 @@ def grafico_linha(historico_tempo):
     plt.savefig('grafico_linha.png', bbox_inches='tight')  # Salva o gráfico com bordas ajustadas
     plt.close(fig)
 
-
 # 4. Gráfico de Rosca
 def grafico_rosca(tempo_medio, tempo_alvo):
     labels = ['Abaixo do Alvo', 'Alvo Alcançado', 'Acima do Alvo']
     values = [tempo_alvo, tempo_medio - tempo_alvo, 10 - tempo_medio]
-    colors = ['green', 'yellow', 'red']
+    colors = ['#0296d3', '#fe7624', 'red']
     fig, ax = plt.subplots()
     ax.pie(values, labels=labels, colors=colors, startangle=90, wedgeprops={'width': 0.3, 'edgecolor': 'black'})
     ax.set_title("Gráfico de Rosca - Tempo Médio")
@@ -67,13 +65,13 @@ def grafico_rosca(tempo_medio, tempo_alvo):
 def indicador_semaforo(tempo_medio, tempo_alvo):
     fig, ax = plt.subplots(figsize=(5, 3))  # Ajuste de tamanho
     if tempo_medio < tempo_alvo:
-        cor = 'green'
+        cor = '#0296d3'
         status = "Abaixo do Alvo"
     elif tempo_medio == tempo_alvo:
         cor = 'yellow'
         status = "Dentro do Alvo"
     else:
-        cor = 'red'
+        cor = '#fe7624'
         status = "Acima do Alvo"
     
     # Texto centralizado na tela
