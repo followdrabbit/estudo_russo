@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 # Dados de exemplo
 tempo_medio_atual = 10  # em horas
 tempo_alvo = 5         # em horas
-historico_tempo = [7.5, 8, 8.5, 7, 8, 7.8, 8.1, 7.9, 8.3, 8.2]  # Histórico de tempos médios
+historico_tempo = [9.8, 10.2, 10, 10.1, 9.9, 10.3, 10.1, 10, 9.8, 10.2]  # Histórico de tempos médios
 
 # 1. Barra de Progresso
 def barra_progresso(tempo_medio, tempo_alvo):
@@ -40,16 +40,17 @@ def grafico_velocimetro(tempo_medio, tempo_alvo):
 
 # 3. Gráfico de Linha
 def grafico_linha(historico_tempo):
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(8, 4))  # Aumenta o tamanho do gráfico
     ax.plot(historico_tempo, marker='o', color='b', label="Tempo Médio")
     ax.axhline(y=tempo_medio_atual, color='orange', linestyle='--', label="Média Atual (8h)")
-    ax.axhline(y=tempo_alvo, color='green', linestyle='--', label="Tempo Alvo (6h)")
+    ax.axhline(y=5, color='green', linestyle='--', label="Tempo Alvo (5h)")  # Ajusta o tempo alvo para 5 horas
     ax.set_xlabel("Período")
     ax.set_ylabel("Horas")
     ax.legend()
     ax.set_title("Gráfico de Linha - Tempo Médio ao Longo do Tempo")
-    plt.savefig('grafico_linha.png')  # Salvar o gráfico
+    plt.savefig('grafico_linha.png', bbox_inches='tight')  # Salva o gráfico com bordas ajustadas
     plt.close(fig)
+
 
 # 4. Gráfico de Rosca
 def grafico_rosca(tempo_medio, tempo_alvo):
